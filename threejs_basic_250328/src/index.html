@@ -7,6 +7,18 @@
     <title>Vite App</title>
   </head>
   <body>
+    <video 
+    id="video-texture" 
+    src="https://static.not-equal.dev/ja_webgl_basic/movie/beach.mp4"
+    style="visibility: hidden; position: absolute;"
+    autoplay
+    muted
+    defaultMuted
+    loop
+    playsinline
+    crossorigin="anonymous" 
+  ></video>
+  <!-- crossorigin: 追加の資格情報（クッキーやHTTP認証情報）なしにクロスオリジン（後述の「オリジンって何？」を参照）へのリクエストが可能となる -->
     <div id="app"></div>
     <script type="module" src="/main.js"></script>
   </body>
