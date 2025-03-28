@@ -19,9 +19,13 @@ createCube(4, 0, 5, 2);
 
 const canvasAspect = window.innerWidth / window.innerHeight;
 
-const camera = new THREE.PerspectiveCamera(75, canvasAspect, 0.1, 1000);
+// PerspectiveCamera
+// const camera = new THREE.PerspectiveCamera(75, canvasAspect, 0.1, 1000);
 // const camera = new THREE.PerspectiveCamera(fov: カメラの視野角を度数で表す(カメラが見ることのできるシーンの広さを決定), aspect: カメラの横と縦の比率, near: カメラに投影する最短の距離, far: カメラに投影する最長の距離)
 
+// OrthographicCamera
+const size = 10;
+const camera = new THREE.OrthographicCamera(-size * canvasAspect, size * canvasAspect, size, -size, 1, 100);
 
 camera.position.z = 10;
 
