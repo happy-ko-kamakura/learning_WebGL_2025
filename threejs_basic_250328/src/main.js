@@ -20,7 +20,7 @@ const geometry = new THREE.PlaneGeometry(10, 10, 5, 2); // 平面 (width, height
 
 const material = new THREE.MeshBasicMaterial({
   color: "#fafafa",
-  side: THREE.DoubleSide,
+  // side: THREE.DoubleSide,
   transparent: true,
   opacity: .5,
   // alphaTest: .5  // アルファブレンディングのパフォーマンスを良くしたい場合は0.5に設定がベスト
@@ -29,9 +29,24 @@ const material = new THREE.MeshBasicMaterial({
 });
 
 // material.wireframe = true
-setTimeout(() => { // 1秒後にwireframe適用
-  material.wireframe  = true
-}, 1000)
+// setTimeout(() => { // 1秒後にwireframe適用
+//   material.wireframe  = true
+// }, 1000)
+
+// material.color = new THREE.Color( 0x00ff00 );
+// material.color.set( 0x00ff00 ) // Colorオブジェクトのcolorプロパティを使用
+
+// material.color = new THREE.Color("rgb(255, 0, 0)");
+material.color = new THREE.Color("rgb(100%, 0%, 0%)");
+material.color = new THREE.Color( 1, 0, 0 );
+
+material.color = new THREE.Color("hsl(0, 100%, 50%)"); //hsl(Hue: 色相(色を角度で表す), Saturation(色の鮮やかさ), Lightness(色の明るさ))
+material.color = new THREE.Color( "skyblue" );
+
+
+
+
+
 
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
