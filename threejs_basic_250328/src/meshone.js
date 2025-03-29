@@ -32,6 +32,7 @@ function mapRand(min, max, isInt = false) {
 }
 
 const POS_RANGE = 70;
+const TARGET_MESH_NUM = 10;
 const MAX_SCALE = 1.5;
 const MESH_NUM = 50;
  const meshes = [];
@@ -80,6 +81,7 @@ const MESH_NUM = 50;
 
 
   const axis = new THREE.AxesHelper(20);
+  axis.visible=false;
   scene.add(axis);
 
   camera.position.z = 30;
@@ -96,13 +98,63 @@ const MESH_NUM = 50;
   light2.position.set(-50, -10, 0);
   const helper2 = new THREE.PointLightHelper(light2, 3, 0xff0000);
   scene.add(light2, helper2);
+  helper1.visible = false;
+  helper2.visible = false;
+
 
   const amlight = new THREE.AmbientLight(0xe4e4e4, .6);
   scene.add(amlight);
 
+  let targetMeshes = [];
+//   for(let i = 0; i < TARGET_MESH_NUM; i++) {
+//     const mesh = meshes[mapRand(0, meshes.length - 1, true)];
+
+//     mesh.userData.action = function() {
+//         const direction = mapRand(0.7, 1.3);
+//         mesh.position.x += direction;
+//       }
+
+//     targetMeshes.push(mesh);
+//     }
+
+setInterval(() => {
+    // targetMeshes.forEach(mesh => mesh.userData.action = null);
+    targetMeshes = [];
+    for(let i = 0; i < TARGET_MESH_NUM; i++) {
+      const mesh = meshes[mapRand(0, meshes.length - 1, true)];
+    //   const x = mesh.position.x;
+      const { x, y, z } = mesh.position;
+      const randomDirection = mapRand(0, 3);
+      mesh.userData.action = function() {
+    //   const direction = mapRand(0.7, 1.3);
+    // const rand = mapRand(0.7, 1.3);
+    // // const direction = mesh.position.x < 0 ? rand : -rand;
+    // const direction = x < 0 ? rand : -rand;
+    // mesh.position.x += direction;
+    const rand = mapRand(0.7, 1.3);
+  if(randomDirection < 1) {
+    const direction = x < 0 ? rand : -rand;
+    mesh.position.x += direction;
+  } else if(randomDirection < 2) {
+    const direction = y < 0 ? rand : -rand;
+    mesh.position.y += direction;
+  } else if(randomDirection < 3) {
+    const direction = z < 0 ? rand : -rand;
+    mesh.position.z += direction;
+  }
+      }
+      targetMeshes.push(mesh);
+    }
+    }, 2000);
 
   function animate() {
 	requestAnimationFrame(animate);
+
+    targetMeshes.forEach(mesh => mesh.userData.action());
+
+    if(camera.position.z < POS_RANGE) {
+        camera.position.z += 0.03;
+      }
 
 	control.update();
 
