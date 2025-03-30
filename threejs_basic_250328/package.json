@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.3.4",
-    "react": "^19.0.0"
+    "lil-gui": "^0.20.0",
+    "react": "^19.0.0",
+    "stats-js": "^1.0.1"
   }
 }
