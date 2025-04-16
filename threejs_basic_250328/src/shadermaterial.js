@@ -10,16 +10,32 @@ const camera = new THREE.PerspectiveCamera(
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
+
+renderer.debug.onShaderError = ( gl, program, vertexShader, fragmentShader ) => {
+  const vertexShaderSource = gl.getShaderSource( vertexShader );
+  const fragmentShaderSource = gl.getShaderSource( fragmentShader );
+  console.groupCollapsed( "vertexShader" )
+  console.log( vertexShaderSource )
+  console.groupEnd()
+  console.groupCollapsed( "fragmentShader" )
+  console.log( fragmentShaderSource )
+  console.groupEnd()
+}
+
+
 document.body.appendChild(renderer.domElement);
 
 const geometry = new THREE.BoxGeometry(2, 2, 2);
+console.log(geometry)
 const material = new THREE.ShaderMaterial({
   vertexShader: `
+  // 頂点シェーダー
 	varying vec2 vUv;
 
 	void main() {
 	  vUv = uv;
-	  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+	  // gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(posit, 1.0);
 	}
   `,
   fragmentShader: `
