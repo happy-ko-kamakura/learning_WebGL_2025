@@ -103,6 +103,9 @@ function setupBuffers(pInfo) {
   // 頂点の位置を指定（-1 ~ 1）
   const triangleVertices = [
 	-1, -1,
+    // 0, -1,
+    // 1, -1,
+    // 1, 0,
 	1, 1,
 	-1, 1
   ];
